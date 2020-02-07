@@ -1,48 +1,66 @@
 import random
+import statistics
 
-#lowerRangeA = input('please put in the lower range of the randomizer: ')
-#upperRangeA = input('please put in the upper range of the randomizer: ')
+lowerRInsert = input('please put in the lower range of the randomizer: ')
+upperRInsert = input('please put in the upper range of the randomizer: ')
+lowerRInsert = int(lowerRInsert)
+upperRInsert = int(upperRInsert)
+lowerRangeA = lowerRInsert
+upperRangeA = upperRInsert
 
-#lowerRangeA = int(lowerRangeA)
-#upperRangeA = int(upperRangeA)
+populationControl = input('please input population size: ')
+populationControl = int(populationControl)
 
-lowerRangeA = 1
-upperRangeA = 100
-numberAuth = random.randint(lowerRangeA, upperRangeA)
-numberBeta = random.randint(lowerRangeA, upperRangeA)
+data = []
 
-counter = 1
+for index in range(populationControl):
 
-if numberAuth == numberBeta:
+	lowerRangeA = lowerRInsert
+	upperRangeA = upperRInsert
 
-	print(counter)
+	numberAuth = random.randint(lowerRangeA, upperRangeA)
+	numberBeta = random.randint(lowerRangeA, upperRangeA)
 
-elif numberAuth > numberBeta:
-
-	lowerRangeA = numberBeta
-	numberBeta = random.randint(lowerRangeA + 1, upperRangeA)
-
-else: # numberAuth < numberBeta 
-
-	upperRangeA = numberBeta
-	numberBeta = random.randint(lowerRangeA, upperRangeA - 1)
-
-while numberAuth != numberBeta:
-
-	counter = counter + 1
+	counter = 1
 
 	if numberAuth > numberBeta:
 
 		lowerRangeA = numberBeta
 		numberBeta = random.randint(lowerRangeA + 1, upperRangeA)
 
-	elif numberAuth < numberBeta:
+	else: # numberAuth < numberBeta 
 
 		upperRangeA = numberBeta
 		numberBeta = random.randint(lowerRangeA, upperRangeA - 1)
 
-	else:
+	while numberAuth != numberBeta:
 
-		break
-	
-print(counter)
+		counter = counter + 1
+
+		if numberAuth > numberBeta:
+
+			lowerRangeA = numberBeta
+			numberBeta = random.randint(lowerRangeA + 1, upperRangeA)
+
+		elif numberAuth < numberBeta:
+
+			upperRangeA = numberBeta
+			numberBeta = random.randint(lowerRangeA, upperRangeA - 1)
+
+		else:
+
+			break
+		
+	data.append(counter)
+
+print('------------')
+
+print('mean: ', statistics.mean(data))
+
+print('median: ', statistics.median(data))
+
+print('population standard deviation: ', statistics.pstdev(data))
+
+print('population variance: ', statistics.pvariance(data))
+
+print('------------')
